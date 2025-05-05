@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Cars{% endblock title %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+{% block body %}
+
+<main role="main" style="background-color: rgb(200, 200, 200)">
+    <section class="jumbotron text-center" style="background-color: rgb(200, 200, 200)">
+        <div class="container">
+            <h1 class="jumbotron-heading" style="font-size:50px">Welcome {{ request.user }} !!</h1>
+            <p style="font-size:25px; margin-top:30px">Get wide varieties of cars in affordable prices!!</p>
+        </div>
+    </section>
+</main>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order Id</th>
+            <th>Cars</th>
+            <th>No. of days</th>
+            <th>Date</th>
+            <th>From</th>
+            <th>To</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in order %}
+            {% if i.name == request.user.username %}
+                <tr>
+                    <td>{{ i.order_id }}</td>
+                    <td>{{ i.cars }}</td>
+                    <td>{{ i.days_for_rent }}</td>
+                    <td>{{ i.date }}</td>
+                    <td>{{ i.loc_from }}</td>
+                    <td>{{ i.loc_to }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock body %}
